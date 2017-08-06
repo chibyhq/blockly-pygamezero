@@ -11,11 +11,11 @@ Blockly.Python['update'] = function(block) {
 };
 
 Blockly.Python['actor'] = function(block) {
-  var text_image = block.getFieldValue('IMAGE');
+  var base_image = block.getFieldValue('NAME');
   var dropdown_anchor = block.getFieldValue('ANCHOR');
   var number_posx = block.getFieldValue('POSX');
   var number_posy = block.getFieldValue('POSY');
-  var code = 'Actor(\''+text_image+'\','+dropdown_anchor+'=('+number_posx+','+number_posy+'))';
+  var code = base_image +' = Actor(\''+base_image+'\','+dropdown_anchor+'=('+number_posx+','+number_posy+'))';
   return [code, Blockly.Python.ORDER_NONE];
 };
 

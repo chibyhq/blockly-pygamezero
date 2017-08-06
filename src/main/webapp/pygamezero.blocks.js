@@ -29,15 +29,16 @@ Blockly.Blocks['actor'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Add a new game actor")
-        .appendField(new Blockly.FieldTextInput(""), "IMAGE")
+        .appendField(new Blockly.FieldTextInput(""), "NAME")
         .appendField("anchored by its")
         .appendField(new Blockly.FieldDropdown([ ["topleft","topleft"], ["center","center"],  ["midtop","midtop"], ["topright","topright"], ["midleft","midleft"], ["midright","midright"], ["bottomleft","bottomleft"], ["midbottom","midbottom"], ["bottomright","bottomright"]]), "ANCHOR")
         .appendField("at position X")
         .appendField(new Blockly.FieldNumber(0, 0), "POSX")
         .appendField("Y")
         .appendField(new Blockly.FieldNumber(0, 0), "POSY");;
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setInputsInline(false);
-    this.setOutput(true, "Actor");
     this.setColour(90);
     this.setTooltip('Define a new actor in the game');
     this.setHelpUrl('');
