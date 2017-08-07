@@ -1,8 +1,5 @@
 /*
  * Required blocks :
-   * Actor draw
-   * Move actor relative
-   * Rect constructor
    * Screen draw
      * Shapes
      * Text display
@@ -12,16 +9,18 @@
    * Clock.schedule
    * Animate actor attributes
        * Position attribute
-       * 
+       * Height ? Width ? zoom ?
+       * Rotation ??
    * Music control (rpi compatible ??)
    * sounds
+   * Move actor relative
  *
  *
  */
 
 
 
-Blockly.Blocks['draw'] = {
+Blockly.Blocks['draw_loop'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Draw Loop");
@@ -34,8 +33,8 @@ Blockly.Blocks['draw'] = {
   }
 };
 
-Blockly.Blocks['update'] = {
-  init: function() {                           
+Blockly.Blocks['update_loop'] = {
+  init: function() {
     this.appendDummyInput()
         .appendField("Update Loop");
     this.appendStatementInput("STATEMENTS")
@@ -67,30 +66,15 @@ Blockly.Blocks['actor'] = {
   }
 };
 
-Blockly.Blocks['actor_position'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Move actor")
-        .appendField(new Blockly.FieldVariable("item"), "ACTOR")
-        .appendField("to position X")
-        .appendField(new Blockly.FieldNumber(0, 0), "POSX")
-        .appendField("Y")
-        .appendField(new Blockly.FieldNumber(0, 0), "POSY");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(0);
-    this.setTooltip('Move the actor to a given position');
-    this.setHelpUrl('');
-  }
-};
-
 Blockly.Blocks['actor_image'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Update actor")
         .appendField(new Blockly.FieldVariable("item"), "ACTOR")
-        .appendField("with image")
-        .appendField(new Blockly.FieldTextInput(""), "IMAGE");
+        .appendField("with image");
+    this.appendValueInput("IMAGE")
+        .setCheck("String");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
@@ -110,6 +94,40 @@ Blockly.Blocks['get_actor_property'] = {
     this.setColour(315);
     this.setTooltip('Get a property value from an actor');
     this.setHelpUrl('');
+  }
+};
+
+
+Blockly.Blocks['actor_position'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Move character")
+        .appendField(new Blockly.FieldVariable("item"), "ACTOR")
+        .appendField("to position X");
+    this.appendValueInput("POSX")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("Y");
+    this.appendValueInput("POSY")
+        .setCheck("Number");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip("Move the character to a given position");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['actor_draw'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Draw actor")
+        .appendField(new Blockly.FieldVariable("item"), "ACTOR");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip("Draw the actor on the screen at its set position");
+    this.setHelpUrl("");
   }
 };
 
@@ -135,5 +153,29 @@ Blockly.Blocks['screen_fill'] = {
     this.setColour(270);
     this.setTooltip('Fill the screen with the given color');
     this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['screen_create_rect'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create a rectangle");
+    this.appendValueInput("X")
+        .setCheck("Number")
+        .appendField("X");
+    this.appendValueInput("Y")
+        .setCheck("Number")
+        .appendField("Y");
+    this.appendValueInput("WIDTH")
+        .setCheck("Number")
+        .appendField("Width");
+    this.appendValueInput("HEIGHT")
+        .setCheck("Number")
+        .appendField("Height");
+    this.setInputsInline(true);
+    this.setOutput(true, "Rect");
+    this.setColour(270);
+ this.setTooltip("Create a rectangular surface for use in Pygame");
+ this.setHelpUrl("");
   }
 };
