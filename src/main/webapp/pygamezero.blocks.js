@@ -1,11 +1,33 @@
+/*
+ * Required blocks :
+   * Actor draw
+   * Move actor relative
+   * Rect constructor
+   * Screen draw
+     * Shapes
+     * Text display
+   * Screen blit
+   * Keyboard events
+   * Mouse click events
+   * Clock.schedule
+   * Animate actor attributes
+       * Position attribute
+       * 
+   * Music control (rpi compatible ??)
+   * sounds
+ *
+ *
+ */
+
+
+
 Blockly.Blocks['draw'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Draw Loop");
-    this.appendStatementInput("DRAW")
+    this.appendStatementInput("STATEMENTS")
         .setCheck(null);
-    this.setInputsInline(false);
-    this.setColour(240);
+    this.setColour(120);
     this.setTooltip('Main Pygamezero Draw loop');
     this.setDeletable(false);
     this.setHelpUrl('');
@@ -13,12 +35,12 @@ Blockly.Blocks['draw'] = {
 };
 
 Blockly.Blocks['update'] = {
-  init: function() {
+  init: function() {                           
     this.appendDummyInput()
         .appendField("Update Loop");
-    this.appendStatementInput("UPDATE")
+    this.appendStatementInput("STATEMENTS")
         .setCheck(null);
-    this.setColour(240);
+    this.setColour(120);
     this.setTooltip('Main Pygamezero Update Loop');
     this.setDeletable(false);
     this.setHelpUrl('');
@@ -29,7 +51,7 @@ Blockly.Blocks['actor'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Add a new game actor")
-        .appendField(new Blockly.FieldTextInput(""), "NAME")
+        .appendField(new Blockly.FieldVariable("item"), "NAME")
         .appendField("anchored by its")
         .appendField(new Blockly.FieldDropdown([ ["topleft","topleft"], ["center","center"],  ["midtop","midtop"], ["topright","topright"], ["midleft","midleft"], ["midright","midright"], ["bottomleft","bottomleft"], ["midbottom","midbottom"], ["bottomright","bottomright"]]), "ANCHOR")
         .appendField("at position X")
@@ -39,7 +61,7 @@ Blockly.Blocks['actor'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(false);
-    this.setColour(90);
+    this.setColour(0);
     this.setTooltip('Define a new actor in the game');
     this.setHelpUrl('');
   }
@@ -71,7 +93,7 @@ Blockly.Blocks['actor_image'] = {
         .appendField(new Blockly.FieldTextInput(""), "IMAGE");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(90);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('');
   }
