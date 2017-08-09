@@ -1,9 +1,11 @@
 /*
  * Required blocks :
    * Screen draw
-     * Shapes
+     * 
+     *  Shapes
      * Text display
    * Screen blit
+     * Surfaces
    * Keyboard events
    * Mouse click events
    * Clock.schedule
@@ -91,7 +93,7 @@ Blockly.Blocks['get_actor_property'] = {
         .appendField("position of actor")
         .appendField(new Blockly.FieldVariable("item"), "ACTOR");
     this.setOutput(true, "Number");
-    this.setColour(315);
+    this.setColour(0);
     this.setTooltip('Get a property value from an actor');
     this.setHelpUrl('');
   }
@@ -101,7 +103,7 @@ Blockly.Blocks['get_actor_property'] = {
 Blockly.Blocks['actor_position'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Move character")
+        .appendField("Move actor")
         .appendField(new Blockly.FieldVariable("item"), "ACTOR")
         .appendField("to position X");
     this.appendValueInput("POSX")
@@ -156,6 +158,29 @@ Blockly.Blocks['screen_fill'] = {
   }
 };
 
+Blockly.Blocks['screen_blit'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Draw image");
+    this.appendValueInput("IMAGE")
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField("on the screen at position");
+    this.appendValueInput("TOP")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(",");
+    this.appendValueInput("LEFT")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(270);
+    this.setTooltip('Draws the given image file on the screen');
+    this.setHelpUrl('');
+  }
+};
+
 Blockly.Blocks['screen_create_rect'] = {
   init: function() {
     this.appendDummyInput()
@@ -177,5 +202,151 @@ Blockly.Blocks['screen_create_rect'] = {
     this.setColour(270);
  this.setTooltip("Create a rectangular surface for use in Pygame");
  this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['screen_draw_line'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Draw a line from");
+    this.appendValueInput("STARTX")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(",");
+    this.appendValueInput("STARTY")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("to");
+    this.appendValueInput("FINISHX")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(",");
+    this.appendValueInput("FINISHY")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("in color")
+        .appendField(new Blockly.FieldColour("#FFFFFF"), "COLOR");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(270);
+    this.setTooltip('Draws a line on the screen');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['screen_draw_circle'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Draw a(n)")
+        .appendField(new Blockly.FieldDropdown([ ["empty","circle"], ["filled","filled_circle"]]), "EMPTYFILLED")
+    this.appendDummyInput()
+        .appendField("circle at");
+    this.appendValueInput("CENTERX")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField(",");
+    this.appendValueInput("CENTERY")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("and a radius of");
+    this.appendValueInput("RADIUS")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("pixels in color")
+        .appendField(new Blockly.FieldColour("#FFFF00"), "COLOR");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(270);
+    this.setTooltip('Draws a circle on the screen');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['screen_draw_rectangle'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Draw a(n)")
+        .appendField(new Blockly.FieldDropdown([ ["empty","rect"], ["filled","filled_rect"]]), "EMPTYFILLED")
+    this.appendDummyInput()
+        .appendField("rectangle ");
+    this.appendValueInput("RECT")
+        .setCheck("Rect");
+    this.appendDummyInput()
+        .appendField("in color")
+        .appendField(new Blockly.FieldColour("#FF0000"), "COLOR");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(270);
+    this.setTooltip('Draws a rectangle on the screen');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['screen_draw_text'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Draw text");
+    this.appendValueInput("TEXT")
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField("at")
+    this.appendValueInput("X")
+        .setCheck("Number")
+        .appendField("X");
+    this.appendValueInput("Y")
+        .setCheck("Number")
+        .appendField("Y");
+    this.appendDummyInput()
+        .appendField("formatted as");
+    this.appendValueInput("FORMAT")
+        .setCheck("Array");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(270);
+    this.setTooltip('Draws the given text on the screen using formatting');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['format_font_name'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Font name");
+    this.appendValueInput("VALUE")
+        .setCheck("String");
+    this.setInputsInline(true);
+    this.setOutput(true, "KeyValue");
+    this.setColour(250);
+    this.setTooltip('Sets the Font Name formatting option for text');
+    this.setHelpUrl('');
+  }
+};
+Blockly.Blocks['format_font_size'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Font size");
+    this.appendValueInput("VALUE")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setOutput(true, "KeyValue");
+    this.setColour(250);
+    this.setTooltip('Sets the Font Size formatting option for text');
+    this.setHelpUrl('');
+  }
+};
+Blockly.Blocks['format_font_color'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Font color")
+        .appendField(new Blockly.FieldColour("#FFFFFF"), "VALUE");
+    this.setInputsInline(true);
+    this.setOutput(true, "KeyValue");
+    this.setColour(250);
+    this.setTooltip('Sets the Font Color formatting option for text');
+    this.setHelpUrl('');
   }
 };
