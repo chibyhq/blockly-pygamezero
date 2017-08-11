@@ -156,3 +156,11 @@ Blockly.Python['format_font_color'] = function(block) {
   var code = "'color':"+value+",";
   return code;
 };
+
+Blockly.Python['format_text_position'] = function(block) {
+  var value_anchor = block.getFieldValue('ANCHOR');
+  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
+  var code = "'"+value_anchor+"':("+x+','+y+"),";
+  return code;
+};
