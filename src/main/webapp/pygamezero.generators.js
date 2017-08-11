@@ -2,6 +2,9 @@
  * Convert a given HEX color code to a string (handling the padding)
  */
 function hexToRgb(hex) {
+    if(hex == null){
+        return "(0,0,0)";
+    }
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
     hex = hex.replace(shorthandRegex, function(m, r, g, b) {
         return r + r + g + g + b + b;
@@ -125,30 +128,31 @@ Blockly.Python['screen_draw_rectangle'] = function(block) {
 
 Blockly.Python['screen_draw_text'] = function(block) {
   var text =  Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_ATOMIC);
-  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
-  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
-  var formatArray = Blockly.Python.valueToCode(block,'FORMAT',Blockly.Python.ORDER_MEMBER);
+  var formatArray = Blockly.Python.statementToCode(block,'FORMAT');
+  var arrayDict = "";
+  // Convert text format array into a python dictionary that we unpack to
+  // fill named arguments
+  if(formatArray != null && formatArray.length > 0){
+      arrayDict = ",**{"+(formatArray.replace(/\,\s*$/, '  '))+"}";
+  }
   
-  console.log(formatArray);
-  // Convert format Array into a list of named properties by calling code conversion on each
-  
-  var code = 'screen.draw.text('+text+',pos=('+x+','+y+'),'+""+')\n';
+  var code = 'screen.draw.text('+text+arrayDict+')\n';
   return code;
 };
 
 Blockly.Python['format_font_name'] = function(block) {
   var value =  Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
-  var code = '{fontname:'+value+'}';
+  var code = "'fontname':"+value+",";
   return code;
 };
 
 Blockly.Python['format_font_size'] = function(block) {
   var value =  Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
-  var code = '{fontsize:'+value+'}';
+  var code = "'fontsize':"+value+",";
   return code;
 };
 Blockly.Python['format_font_color'] = function(block) {
-  var value =  hexToRgb(block.getFieldValue( 'VALUE'));
-  var code = '{color:('+value+')}';
+  var value =  hexToRgb(block.getFieldValue(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));
+  var code = "'color':"+value+",";
   return code;
 };

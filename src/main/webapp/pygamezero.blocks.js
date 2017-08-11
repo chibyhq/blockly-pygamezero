@@ -292,17 +292,9 @@ Blockly.Blocks['screen_draw_text'] = {
     this.appendValueInput("TEXT")
         .setCheck("String");
     this.appendDummyInput()
-        .appendField("at")
-    this.appendValueInput("X")
-        .setCheck("Number")
-        .appendField("X");
-    this.appendValueInput("Y")
-        .setCheck("Number")
-        .appendField("Y");
-    this.appendDummyInput()
         .appendField("formatted as");
-    this.appendValueInput("FORMAT")
-        .setCheck("Array");
+    this.appendStatementInput("FORMAT")
+        .setCheck(["format_font_name", "format_font_size", "format_font_color"]);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -319,9 +311,10 @@ Blockly.Blocks['format_font_name'] = {
     this.appendValueInput("VALUE")
         .setCheck("String");
     this.setInputsInline(true);
-    this.setOutput(true, "KeyValue");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, ["format_font_name", "format_font_size", "format_font_color"]);
     this.setColour(250);
-    this.setTooltip('Sets the Font Name formatting option for text');
+    this.setTooltip('Sets the Font Name of the text');
     this.setHelpUrl('');
   }
 };
@@ -332,9 +325,10 @@ Blockly.Blocks['format_font_size'] = {
     this.appendValueInput("VALUE")
         .setCheck("Number");
     this.setInputsInline(true);
-    this.setOutput(true, "KeyValue");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, ["format_font_name", "format_font_size", "format_font_color"]);
     this.setColour(250);
-    this.setTooltip('Sets the Font Size formatting option for text');
+    this.setTooltip('Sets the Font Size of the text');
     this.setHelpUrl('');
   }
 };
@@ -344,9 +338,10 @@ Blockly.Blocks['format_font_color'] = {
         .appendField("Font color")
         .appendField(new Blockly.FieldColour("#FFFFFF"), "VALUE");
     this.setInputsInline(true);
-    this.setOutput(true, "KeyValue");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, ["format_font_name", "format_font_size", "format_font_color"]);
     this.setColour(250);
-    this.setTooltip('Sets the Font Color formatting option for text');
+    this.setTooltip('Sets the Font Color of the text');
     this.setHelpUrl('');
   }
 };
