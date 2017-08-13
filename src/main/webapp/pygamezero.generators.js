@@ -28,6 +28,32 @@ Blockly.Python['update_loop'] = function(block) {
   return code;
 };
 
+Blockly.Python['on_touch_event'] = function(block) {
+  var event = block.getFieldValue('EVENT');
+  var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
+  var code = 'def '+event+'(touch_position):\n'+statements+'\n';
+  return code;
+};
+
+Blockly.Python['on_drag_event'] = function(block) {
+  var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
+  var code = 'def on_mouse_move(touch_position,relative_dragged_distance):\n'+statements+'\n';
+  return code;
+};
+
+Blockly.Python['get_last_touch_position'] = function(block) {
+  var code = 'touch_position';
+  return [code, Blockly.Python.ORDER_ADDITION];
+};
+
+Blockly.Python['get_last_drag_distance'] = function(block) {
+  var dropdown_property = block.getFieldValue('PROPERTY');
+  var code = 'relative_dragged_distance.'+dropdown_property;
+  return [code, Blockly.Python.ORDER_ADDITION];
+};
+
+
+
 Blockly.Python['actor'] = function(block) {
   var actor_var_name = block.getFieldValue('NAME');
   var dropdown_anchor = block.getFieldValue('ANCHOR');
@@ -36,8 +62,6 @@ Blockly.Python['actor'] = function(block) {
   var code = actor_var_name +' = Actor(\''+actor_var_name+'\','+dropdown_anchor+'=('+number_posx+','+number_posy+'))\n';
   return code;
 };
-
-
 
 
 Blockly.Python['actor_image'] = function(block) {
@@ -51,6 +75,13 @@ Blockly.Python['get_actor_property'] = function(block) {
   var dropdown_property = block.getFieldValue('PROPERTY');
   var variable_actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
   var code = variable_actor+'.'+dropdown_property;
+  return [code, Blockly.Python.ORDER_ADDITION];
+};
+
+Blockly.Python['actor_colliding'] = function(block) {
+  var actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
+  var position = Blockly.Python.valueToCode(block,'POSITION', Blockly.Python.ORDER_ATOMIC);
+  var code = actor+'.collidepoint('+position+')';
   return [code, Blockly.Python.ORDER_ADDITION];
 };
 
@@ -172,7 +203,7 @@ Blockly.Python['format_text_position'] = function(block) {
 
 Blockly.Python['format_text_rotation'] = function(block) {
   var value_angle = block.getFieldValue('VALUE');
-  var code = "'rotation':"+value_angle+",";
+  var code = "'angle':"+value_angle+",";
   return code;
 };
 

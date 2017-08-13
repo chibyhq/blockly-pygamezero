@@ -1,20 +1,19 @@
 /*
  * Required blocks :
-   * Screen draw
-     * 
-     *  Shapes
-     * Text display
-   * Screen blit
-     * Surfaces
    * Keyboard events
    * Mouse click events
    * Clock.schedule
+   * Screen blit
+     * Surfaces
    * Animate actor attributes
        * Position attribute
        * Height ? Width ? zoom ?
        * Rotation ??
    * Music control (rpi compatible ??)
    * sounds
+   * Text
+      * Position with all supported attributes (unary and binary)
+      * Anchor with all supported combinations of (1,1) (0,1) (0,0) (1,0) as dropdown
    * Move actor relative
  *
  *
@@ -30,7 +29,7 @@ Blockly.Blocks['draw_loop'] = {
         .setCheck(null);
     this.setColour(120);
     this.setTooltip('Main Pygamezero Draw loop');
-    this.setDeletable(false);
+//    this.setDeletable(false);
     this.setHelpUrl('');
   }
 };
@@ -43,7 +42,55 @@ Blockly.Blocks['update_loop'] = {
         .setCheck(null);
     this.setColour(120);
     this.setTooltip('Main Pygamezero Update Loop');
-    this.setDeletable(false);
+//    this.setDeletable(false);
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['on_touch_event'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("When the touch screen is ")
+        .appendField(new Blockly.FieldDropdown([ ["pressed","on_mouse_down"], ["released","on_mouse_up"] ]), "EVENT");
+    this.appendStatementInput("STATEMENTS")
+        .setCheck(null);
+    this.setColour(120);
+    this.setTooltip('Executes code when the touchscreen is pressed or released');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['on_drag_event'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("When the touch screen is dragged");
+    this.appendStatementInput("STATEMENTS")
+        .setCheck(null);
+    this.setColour(120);
+    this.setTooltip('Executes code when a finger is dragged across the touchscreen');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['get_last_touch_position'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Get touch position");
+    this.setColour(120);
+    this.setOutput(true,"Position");
+    this.setTooltip('Returns the touch position (inside a touchscreen event handler only !)');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['get_last_drag_distance'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Get drag distance")
+        .appendField(new Blockly.FieldDropdown([["X","x"], ["Y","y"]]), "PROPERTY");
+    this.setColour(120);
+    this.setOutput(true,"Number");
+    this.setTooltip('Returns the relative distance of the drag event (inside a drag event handler only !)');
     this.setHelpUrl('');
   }
 };
@@ -61,7 +108,7 @@ Blockly.Blocks['actor'] = {
         .appendField(new Blockly.FieldNumber(0, 0), "POSY");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setInputsInline(false);
+    this.setInputsInline(true);
     this.setColour(0);
     this.setTooltip('Define a new actor in the game');
     this.setHelpUrl('');
@@ -99,7 +146,6 @@ Blockly.Blocks['get_actor_property'] = {
   }
 };
 
-
 Blockly.Blocks['actor_position'] = {
   init: function() {
     this.appendDummyInput()
@@ -116,6 +162,23 @@ Blockly.Blocks['actor_position'] = {
     this.setNextStatement(true, null);
     this.setColour(0);
     this.setTooltip("Move the character to a given position");
+    this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['actor_colliding'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Actor")
+        .appendField(new Blockly.FieldVariable("item"), "ACTOR")
+        .appendField("colliding with position");
+    this.appendValueInput("POSITION")
+        .setCheck("Position");
+    this.setInputsInline(true);
+    this.setOutput(true, "Boolean");
+    this.setColour(0);
+    this.setTooltip("Returns true if the actor is colliding with the given position");
     this.setHelpUrl("");
   }
 };
