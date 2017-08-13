@@ -304,6 +304,18 @@ Blockly.Blocks['screen_draw_text'] = {
   }
 };
 
+// Global variable that lists all Text Format blocks that are allowed 
+var pgzTextFormatBlocks = ["format_font_name"
+                          ,"format_font_size"
+                          ,"format_font_color"
+                          ,"format_font_bgcolor"
+                          ,"format_text_position"
+                          ,"format_text_rotation"
+                          ,"format_text_align"
+                          ,"format_text_shadow"
+                 //         ,"__"
+                          ];
+
 Blockly.Blocks['format_font_name'] = {
   init: function() {
     this.appendDummyInput()
@@ -311,8 +323,8 @@ Blockly.Blocks['format_font_name'] = {
     this.appendValueInput("VALUE")
         .setCheck("String");
     this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, ["format_font_name", "format_font_size", "format_font_color"]);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
     this.setColour(250);
     this.setTooltip('Sets the Font Name of the text');
     this.setHelpUrl('');
@@ -325,8 +337,8 @@ Blockly.Blocks['format_font_size'] = {
     this.appendValueInput("VALUE")
         .setCheck("Number");
     this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, ["format_font_name", "format_font_size", "format_font_color"]);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
     this.setColour(250);
     this.setTooltip('Sets the Font Size of the text');
     this.setHelpUrl('');
@@ -338,10 +350,23 @@ Blockly.Blocks['format_font_color'] = {
         .appendField("Font color")
         .appendField(new Blockly.FieldColour("#FFFFFF"), "VALUE");
     this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, ["format_font_name", "format_font_size", "format_font_color"]);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
     this.setColour(250);
     this.setTooltip('Sets the Font Color of the text');
+    this.setHelpUrl('');
+  }
+};
+Blockly.Blocks['format_font_bgcolor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Font background color")
+        .appendField(new Blockly.FieldColour("#FFFFFF"), "VALUE");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
+    this.setColour(250);
+    this.setTooltip('Sets the Font Background Color of the text');
     this.setHelpUrl('');
   }
 };
@@ -359,10 +384,57 @@ Blockly.Blocks['format_text_position'] = {
     this.appendValueInput("Y")
         .setCheck("Number");
     this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, ["format_font_name", "format_font_size", "format_font_color"]);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
     this.setColour(250);
     this.setTooltip('Sets the Font Color of the text');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['format_text_rotation'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Text Rotation Angle")
+        .appendField(new Blockly.FieldAngle(0), "VALUE");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
+    this.setColour(250);
+    this.setTooltip('Sets the Rotation Angle of the text');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['format_text_align'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Text aligned to the ")
+        .appendField(new Blockly.FieldDropdown([ ["left","left"], ["center","center"], ["right","right"]]), "VALUE")
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
+    this.setColour(250);
+    this.setTooltip('Sets the Alignment of the text');
+    this.setHelpUrl('');
+  }
+};
+Blockly.Blocks['format_text_shadow'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Text shadow offset by ")
+        .appendField("X");
+    this.appendValueInput("X")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("Y");
+    this.appendValueInput("Y")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, pgzTextFormatBlocks);
+    this.setNextStatement(true, pgzTextFormatBlocks);
+    this.setColour(250);
+    this.setTooltip('Sets a Shadow under the text with the given offset');
     this.setHelpUrl('');
   }
 };

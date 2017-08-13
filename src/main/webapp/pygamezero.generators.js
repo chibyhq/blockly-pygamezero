@@ -156,11 +156,35 @@ Blockly.Python['format_font_color'] = function(block) {
   var code = "'color':"+value+",";
   return code;
 };
+Blockly.Python['format_font_bgcolor'] = function(block) {
+  var value =  hexToRgb(block.getFieldValue(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));
+  var code = "'background':"+value+",";
+  return code;
+};
 
 Blockly.Python['format_text_position'] = function(block) {
   var value_anchor = block.getFieldValue('ANCHOR');
   var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
   var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
   var code = "'"+value_anchor+"':("+x+','+y+"),";
+  return code;
+};
+
+Blockly.Python['format_text_rotation'] = function(block) {
+  var value_angle = block.getFieldValue('VALUE');
+  var code = "'rotation':"+value_angle+",";
+  return code;
+};
+
+Blockly.Python['format_text_align'] = function(block) {
+  var value =  block.getFieldValue('VALUE');
+  var code = "'align':"+value+",";
+  return code;
+};
+
+Blockly.Python['format_text_shadow'] = function(block) {
+  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
+  var code = "'shadow':("+x+','+y+"),";
   return code;
 };
