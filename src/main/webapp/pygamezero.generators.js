@@ -219,3 +219,51 @@ Blockly.Python['format_text_shadow'] = function(block) {
   var code = "'shadow':("+x+','+y+"),";
   return code;
 };
+
+Blockly.Python['clock_schedule'] = function(block) {
+  var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
+  var repeatMode =  block.getFieldValue('REPEAT');
+  var callbackName = Blockly.Python.valueToCode(block, 'CALLBACK_NAME', Blockly.Python.ORDER_ATOMIC);
+  
+  if( (! callbackName) || (callbackName.trim() == "") ){
+    callbackName = 'scheduled_'+block.id;
+  }
+  
+  var functionName = Blockly.Python.provideFunction_(
+    callbackName,
+    [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
+      statements,
+      '\n']);
+  var delay = Blockly.Python.valueToCode(block, 'DELAY', Blockly.Python.ORDER_ATOMIC);
+  
+  var code = 'Clock.'+repeatMode+'('+functionName+','+delay+')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];  
+};
+
+Blockly.Python['clock_schedule_interval'] = function(block) {
+  var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
+  var callbackName = Blockly.Python.valueToCode(block, 'CALLBACK_NAME', Blockly.Python.ORDER_ATOMIC);
+  
+  if( (! callbackName) || (callbackName.trim() == "") ){
+    callbackName = 'scheduled_interval_'+block.id;
+  }
+  
+  var functionName = Blockly.Python.provideFunction_(
+    callbackName,
+    [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
+      statements,
+      '\n']);
+  var interval = Blockly.Python.valueToCode(block, 'INTERVAL', Blockly.Python.ORDER_ATOMIC);
+  
+  var code = 'Clock.schedule_interval('+functionName+','+interval+')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];  
+};
+
+Blockly.Python['clock_unschedule'] = function(block) {
+  var callbackName = Blockly.Python.valueToCode(block, 'CALLBACK_NAME', Blockly.Python.ORDER_ATOMIC);
+  
+  var functionName = Blockly.Python.functionNames_[callbackName];
+  var code = 'Clock.unschedule('+functionName+')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];  
+};
+

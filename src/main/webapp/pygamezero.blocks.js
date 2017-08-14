@@ -1,16 +1,14 @@
 /*
  * Required blocks :
-   * Keyboard events
-   * Mouse click events
-   * Clock.schedule
-   * Screen blit
-     * Surfaces
    * Animate actor attributes
        * Position attribute
        * Height ? Width ? zoom ?
        * Rotation ??
+   * Screen blit
+     * Surfaces
    * Music control (rpi compatible ??)
    * sounds
+   * Keyboard events
    * Text
       * Position with all supported attributes (unary and binary)
       * Anchor with all supported combinations of (1,1) (0,1) (0,0) (1,0) as dropdown
@@ -498,6 +496,73 @@ Blockly.Blocks['format_text_shadow'] = {
     this.setNextStatement(true, pgzTextFormatBlocks);
     this.setColour(250);
     this.setTooltip('Sets a Shadow under the text with the given offset');
+    this.setHelpUrl('');
+  }
+};
+
+
+Blockly.Blocks['clock_schedule'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Schedule")
+        .appendField(new Blockly.FieldDropdown([ ["once","schedule_unique"], ["forever","schedule"] ]), "REPEAT");
+   this.appendDummyInput()
+        .appendField(" in ");
+    this.appendValueInput("DELAY")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("second(s)");
+   this.appendStatementInput("STATEMENTS")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("*Optional callback name");
+    this.appendValueInput("CALLBACK_NAME")
+        .setCheck("String");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('Execute the given code after the given delay (once or until cancelled)');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['clock_schedule_interval'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Schedule")
+   this.appendDummyInput()
+        .appendField(" every ");
+    this.appendValueInput("INTERVAL")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("second(s)");
+   this.appendStatementInput("STATEMENTS")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("*Optional callback name");
+    this.appendValueInput("CALLBACK_NAME")
+        .setCheck("String");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('Execute the given code at the given interval');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['clock_unschedule'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Cancel scheduled callback")
+    this.appendValueInput("CALLBACK_NAME")
+        .setCheck("String");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('Cancel the given callback');
     this.setHelpUrl('');
   }
 };
