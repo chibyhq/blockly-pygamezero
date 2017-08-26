@@ -31,24 +31,31 @@ Blockly.Python['update_loop'] = function(block) {
 Blockly.Python['on_touch_event'] = function(block) {
   var event = block.getFieldValue('EVENT');
   var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
-  var code = 'def '+event+'(touch_position):\n'+statements+'\n';
+  var code = 'def '+event+'(pos):\n'+statements+'\n';
   return code;
 };
 
 Blockly.Python['on_drag_event'] = function(block) {
   var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
-  var code = 'def on_mouse_move(touch_position,relative_dragged_distance):\n'+statements+'\n';
+  var code = 'def on_mouse_move(pos,rel):\n'+statements+'\n';
   return code;
 };
 
 Blockly.Python['get_last_touch_position'] = function(block) {
-  var code = 'touch_position';
+  var dropdown_property = block.getFieldValue('PROPERTY');
+  var code = 'pos';
+  if(dropdown_property != 'tuple'){
+      code += '['+dropdown_property+']';
+  }
   return [code, Blockly.Python.ORDER_ADDITION];
 };
 
 Blockly.Python['get_last_drag_distance'] = function(block) {
   var dropdown_property = block.getFieldValue('PROPERTY');
-  var code = 'relative_dragged_distance.'+dropdown_property;
+  var code = 'rel';
+  if(dropdown_property != 'tuple'){
+      code += '['+dropdown_property+']';
+  }
   return [code, Blockly.Python.ORDER_ADDITION];
 };
 
@@ -92,6 +99,13 @@ Blockly.Python['actor_position'] = function(block) {
   var code = variable_actor+'.pos = '+value_posx+','+value_posy+'\n';
   return code;
 };
+Blockly.Python['actor_position_tuple'] = function(block) {
+  var variable_actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
+  var value_pos = Blockly.Python.valueToCode(block, 'POS', Blockly.Python.ORDER_ATOMIC);
+  var code = variable_actor+'.pos = '+value_pos+'\n';
+  return code;
+};
+
 
 Blockly.Python['actor_draw'] = function(block) {
   var variable_actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);

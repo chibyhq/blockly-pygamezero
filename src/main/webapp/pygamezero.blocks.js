@@ -73,9 +73,10 @@ Blockly.Blocks['on_drag_event'] = {
 Blockly.Blocks['get_last_touch_position'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Get touch position");
+        .appendField("Get touch position")
+        .appendField(new Blockly.FieldDropdown([["as a tuple","tuple"],["X","0"], ["Y","1"]]), "PROPERTY");
     this.setColour(120);
-    this.setOutput(true,"Position");
+    this.setOutput(true,"Number");
     this.setTooltip('Returns the touch position (inside a touchscreen event handler only !)');
     this.setHelpUrl('');
   }
@@ -85,7 +86,7 @@ Blockly.Blocks['get_last_drag_distance'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Get drag distance")
-        .appendField(new Blockly.FieldDropdown([["X","x"], ["Y","y"]]), "PROPERTY");
+        .appendField(new Blockly.FieldDropdown([["as a tuple","tuple"],["X","0"], ["Y","1"]]), "PROPERTY");
     this.setColour(120);
     this.setOutput(true,"Number");
     this.setTooltip('Returns the relative distance of the drag event (inside a drag event handler only !)');
@@ -164,6 +165,22 @@ Blockly.Blocks['actor_position'] = {
   }
 };
 
+Blockly.Blocks['actor_position_tuple'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Move actor")
+        .appendField(new Blockly.FieldVariable("item"), "ACTOR")
+        .appendField("to position tuple");
+    this.appendValueInput("POS")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip("Move the character to a given position using a tuple");
+    this.setHelpUrl("");
+  }
+};
 
 Blockly.Blocks['actor_colliding'] = {
   init: function() {
