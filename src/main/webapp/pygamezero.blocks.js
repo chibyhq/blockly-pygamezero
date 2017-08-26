@@ -73,10 +73,9 @@ Blockly.Blocks['on_drag_event'] = {
 Blockly.Blocks['get_last_touch_position'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Get touch position")
-        .appendField(new Blockly.FieldDropdown([["as a tuple","tuple"],["X","0"], ["Y","1"]]), "PROPERTY");
+        .appendField("Get touch position");
     this.setColour(120);
-    this.setOutput(true,"Number");
+    this.setOutput(true,"Position");
     this.setTooltip('Returns the touch position (inside a touchscreen event handler only !)');
     this.setHelpUrl('');
   }
@@ -85,10 +84,9 @@ Blockly.Blocks['get_last_touch_position'] = {
 Blockly.Blocks['get_last_drag_distance'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Get drag distance")
-        .appendField(new Blockly.FieldDropdown([["as a tuple","tuple"],["X","0"], ["Y","1"]]), "PROPERTY");
+        .appendField("Get drag distance");
     this.setColour(120);
-    this.setOutput(true,"Number");
+    this.setOutput(true,"Position");
     this.setTooltip('Returns the relative distance of the drag event (inside a drag event handler only !)');
     this.setHelpUrl('');
   }
@@ -100,7 +98,7 @@ Blockly.Blocks['actor'] = {
         .appendField("Add a new game actor")
         .appendField(new Blockly.FieldVariable("item"), "NAME")
         .appendField("anchored by its")
-        .appendField(new Blockly.FieldDropdown([ ["topleft","topleft"], ["center","center"],  ["midtop","midtop"], ["topright","topright"], ["midleft","midleft"], ["midright","midright"], ["bottomleft","bottomleft"], ["midbottom","midbottom"], ["bottomright","bottomright"]]), "ANCHOR")
+        .appendField(new Blockly.FieldDropdown([ ["top left","topleft"], ["center","center"],  ["middle top","midtop"], ["top right","topright"], ["middle left","midleft"], ["middle right","midright"], ["bottom left","bottomleft"], ["middle bottom","midbottom"], ["bottom right","bottomright"]]), "ANCHOR")
         .appendField("at position X")
         .appendField(new Blockly.FieldNumber(0, 0), "POSX")
         .appendField("Y")
@@ -172,7 +170,7 @@ Blockly.Blocks['actor_position_tuple'] = {
         .appendField(new Blockly.FieldVariable("item"), "ACTOR")
         .appendField("to position tuple");
     this.appendValueInput("POS")
-        .setCheck(null);
+        .setCheck("Position");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -453,7 +451,7 @@ Blockly.Blocks['format_text_position'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Text position anchored by its")
-        .appendField(new Blockly.FieldDropdown([ ["topleft","topleft"], ["center","center"],  ["midtop","midtop"], ["topright","topright"], ["midleft","midleft"], ["midright","midright"], ["bottomleft","bottomleft"], ["midbottom","midbottom"], ["bottomright","bottomright"]]), "ANCHOR")
+        .appendField(new Blockly.FieldDropdown([ ["top left","topleft"], ["center","center"],  ["middle top","midtop"], ["top right","topright"], ["middle left","midleft"], ["middle right","midright"], ["bottom left","bottomleft"], ["middle bottom","midbottom"], ["bottom right","bottomright"]]), "ANCHOR")
         .appendField("at X");
     this.appendValueInput("X")
         .setCheck("Number");

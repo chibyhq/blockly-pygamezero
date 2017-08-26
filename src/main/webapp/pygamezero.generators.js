@@ -42,20 +42,12 @@ Blockly.Python['on_drag_event'] = function(block) {
 };
 
 Blockly.Python['get_last_touch_position'] = function(block) {
-  var dropdown_property = block.getFieldValue('PROPERTY');
   var code = 'pos';
-  if(dropdown_property != 'tuple'){
-      code += '['+dropdown_property+']';
-  }
   return [code, Blockly.Python.ORDER_ADDITION];
 };
 
 Blockly.Python['get_last_drag_distance'] = function(block) {
-  var dropdown_property = block.getFieldValue('PROPERTY');
   var code = 'rel';
-  if(dropdown_property != 'tuple'){
-      code += '['+dropdown_property+']';
-  }
   return [code, Blockly.Python.ORDER_ADDITION];
 };
 
