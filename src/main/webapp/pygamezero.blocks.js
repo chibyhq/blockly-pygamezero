@@ -196,6 +196,8 @@ Blockly.Blocks['actor_colliding'] = {
   }
 };
 
+
+
 Blockly.Blocks['actor_draw'] = {
   init: function() {
     this.appendDummyInput()
@@ -208,6 +210,36 @@ Blockly.Blocks['actor_draw'] = {
     this.setHelpUrl("");
   }
 };
+
+Blockly.Blocks['animate'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Animate object")
+        .appendField(new Blockly.FieldVariable("item"), "OBJECT");
+    this.appendDummyInput()
+        .appendField("using tweening mode")
+        .appendField(new Blockly.FieldDropdown([["linear","linear"], ['accelerate','accelerate'], ['decelerate','decelerate'], ['accelerate then decelerate','accel_decel'], ['elastic at the end','end_elastic'], ['elastic at the start','start_elastic'], ['elastic at start and end','both_elastic'], ['bounce at the end','bounce_end'], ['bounce at the start','bounce_start'], ['bounce at the start and end','bounce_start_end']]), "TWEENING");
+    this.appendDummyInput()
+        .appendField("during");
+    this.appendValueInput("DURATION")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("seconds, to reach the following targets");
+    this.appendStatementInput("TARGETS")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("* When finished, execute this code");
+   this.appendStatementInput("ON_FINISHED")
+        .setCheck(null);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('Animate the actor by updating its properties progressively');
+    this.setHelpUrl('');
+  }
+};
+
 
 Blockly.Blocks['screen_clear'] = {
   init: function() {
@@ -370,7 +402,7 @@ Blockly.Blocks['screen_draw_text'] = {
     this.appendDummyInput()
         .appendField("formatted as");
     this.appendStatementInput("FORMAT")
-        .setCheck(["format_font_name", "format_font_size", "format_font_color"]);
+        .setCheck(pgzTextFormatBlocks);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -530,7 +562,7 @@ Blockly.Blocks['clock_schedule'] = {
    this.appendStatementInput("STATEMENTS")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField("*Optional callback name");
+        .appendField("* Optional callback name");
     this.appendValueInput("CALLBACK_NAME")
         .setCheck("String");
     this.setInputsInline(true);
@@ -555,7 +587,7 @@ Blockly.Blocks['clock_schedule_interval'] = {
    this.appendStatementInput("STATEMENTS")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField("*Optional callback name");
+        .appendField("* Optional callback name");
     this.appendValueInput("CALLBACK_NAME")
         .setCheck("String");
     this.setInputsInline(true);

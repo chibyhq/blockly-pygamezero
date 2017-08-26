@@ -62,11 +62,16 @@ Blockly.Python['actor'] = function(block) {
   return code;
 };
 
-
 Blockly.Python['actor_image'] = function(block) {
   var variable_actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
   var value_image = Blockly.Python.valueToCode(block, 'IMAGE', Blockly.Python.ORDER_ATOMIC);
   var code = variable_actor+'.image='+value_image+'\n';
+  return code;
+};
+
+Blockly.Python['actor_draw'] = function(block) {
+  var variable_actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
+  var code = variable_actor+'.draw()\n';
   return code;
 };
 
@@ -98,10 +103,21 @@ Blockly.Python['actor_position_tuple'] = function(block) {
   return code;
 };
 
-
-Blockly.Python['actor_draw'] = function(block) {
-  var variable_actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
-  var code = variable_actor+'.draw()\n';
+Blockly.Python['animate'] = function(block) {
+  var variable_object = Blockly.Python.variableDB_.getName(block.getFieldValue('OBJECT'), Blockly.Variables.NAME_TYPE);
+  var dropdown_tweening = block.getFieldValue('TWEENING');
+  var on_finished_statements = Blockly.Python.statementToCode(block, 'ON_FINISHED');
+  var value_duration = Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);
+  var functionName = '';
+  if( (! on_finished_statements) || (on_finished_statements.trim() == "") ){
+      var onFinishedFunctionName = 'on_finished_animation_'+block.id;
+      var functionName = Blockly.Python.provideFunction_(
+        onFinishedFunctionName,
+        [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
+          on_finished_statements,
+          '\n']);
+  }
+  var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+')';
   return code;
 };
 
