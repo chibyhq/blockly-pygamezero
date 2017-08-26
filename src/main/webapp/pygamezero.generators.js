@@ -114,7 +114,7 @@ Blockly.Python['screen_blit'] = function(block) {
 
 Blockly.Python['screen_fill'] = function(block) {
   var color_rgb = hexToRgb(block.getFieldValue('COLOR'));
-  var code = 'screen.fill('+color_rgb+')\n';
+  var code = 'screen.fill(('+color_rgb+'))\n';
   return code;
 };
 
@@ -184,12 +184,12 @@ Blockly.Python['format_font_size'] = function(block) {
 };
 Blockly.Python['format_font_color'] = function(block) {
   var value =  hexToRgb(block.getFieldValue(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));
-  var code = "'color':"+value+",";
+  var code = "'color':("+value+"),";
   return code;
 };
 Blockly.Python['format_font_bgcolor'] = function(block) {
   var value =  hexToRgb(block.getFieldValue(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));
-  var code = "'background':"+value+",";
+  var code = "'background':("+value+"),";
   return code;
 };
 
