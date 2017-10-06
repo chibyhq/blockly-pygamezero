@@ -15,29 +15,53 @@ function hexToRgb(hex) {
 }
 
 
+function getGlobalVariablesStatement(block, addLineReturn) {
+  if(addLineReturn=== undefined) {
+    addLineReturn = true;
+  }
+  // taken from blockly/blob/master/generators/python/procedures.js
+  var globals = [];
+  var workspace = block.workspace;
+  var varName;
+  var variables = workspace.getAllVariables() || [];
+  for (var i = 0, variable; variable = variables[i]; i++) {
+    varName = variable.name;
+//    if (block.arguments_.indexOf(varName) == -1) {
+      globals.push(Blockly.Python.variableDB_.getName(varName,
+          Blockly.Variables.NAME_TYPE));
+//    }
+  }
+  var globals = globals.length ? '  global ' + globals.join(', ') + (addLineReturn?'\n':'') : '';
+  return globals;
+}
+
 
 Blockly.Python['draw_loop'] = function(block) {
   var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
-  var code = 'def draw():\n'+statements+'\n';
+  var globals = getGlobalVariablesStatement(block);
+  var code = 'def draw():\n'+globals+statements+'\n';
   return code;
 };
 
 Blockly.Python['update_loop'] = function(block) {
   var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
-  var code = 'def update():\n'+statements+'\n';
+  var globals = getGlobalVariablesStatement(block);
+  var code = 'def update():\n'+globals+statements+'\n';
   return code;
 };
 
 Blockly.Python['on_touch_event'] = function(block) {
   var event = block.getFieldValue('EVENT');
+  var globals = getGlobalVariablesStatement(block);
   var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
-  var code = 'def '+event+'(pos):\n'+statements+'\n';
+  var code = 'def '+event+'(pos):\n'+globals+statements+'\n';
   return code;
 };
 
 Blockly.Python['on_drag_event'] = function(block) {
   var statements = Blockly.Python.statementToCode(block, 'STATEMENTS');
-  var code = 'def on_mouse_move(pos,rel):\n'+statements+'\n';
+  var globals = getGlobalVariablesStatement(block);
+  var code = 'def on_mouse_move(pos,rel):\n'+globals+statements+'\n';
   return code;
 };
 
@@ -50,7 +74,6 @@ Blockly.Python['get_last_drag_distance'] = function(block) {
   var code = 'rel';
   return [code, Blockly.Python.ORDER_ADDITION];
 };
-
 
 
 Blockly.Python['actor'] = function(block) {
@@ -109,12 +132,13 @@ Blockly.Python['animate'] = function(block) {
   var on_finished_statements = Blockly.Python.statementToCode(block, 'ON_FINISHED');
   var value_duration = Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);
   var functionName = '';
+  var globals = getGlobalVariablesStatement(block);
   if( (! on_finished_statements) || (on_finished_statements.trim() == "") ){
       var onFinishedFunctionName = 'on_finished_animation_'+block.id;
       var functionName = Blockly.Python.provideFunction_(
         onFinishedFunctionName,
         [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
-          on_finished_statements,
+          globals,on_finished_statements,
           '\n']);
   }
   var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+')';
@@ -251,10 +275,11 @@ Blockly.Python['clock_schedule'] = function(block) {
     callbackName = 'scheduled_'+block.id;
   }
   
+  var globals = getGlobalVariablesStatement(block,false);
   var functionName = Blockly.Python.provideFunction_(
     callbackName,
     [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
-      statements,
+      globals, statements,
       '\n']);
   var delay = Blockly.Python.valueToCode(block, 'DELAY', Blockly.Python.ORDER_ATOMIC);
   
@@ -270,10 +295,11 @@ Blockly.Python['clock_schedule_interval'] = function(block) {
     callbackName = 'scheduled_interval_'+block.id;
   }
   
+  var globals = getGlobalVariablesStatement(block,false);
   var functionName = Blockly.Python.provideFunction_(
     callbackName,
     [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
-      statements,
+      globals, statements,
       '\n']);
   var interval = Blockly.Python.valueToCode(block, 'INTERVAL', Blockly.Python.ORDER_ATOMIC);
   
