@@ -132,8 +132,8 @@ Blockly.Python['animate'] = function(block) {
   var on_finished_statements = Blockly.Python.statementToCode(block, 'ON_FINISHED');
   var value_duration = Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);
   var functionName = '';
-  var globals = getGlobalVariablesStatement(block);
-  if( (! on_finished_statements) || (on_finished_statements.trim() == "") ){
+  var globals = getGlobalVariablesStatement(block,false);
+  if( ( on_finished_statements) && (on_finished_statements.trim() != "") ){
       var onFinishedFunctionName = 'on_finished_animation_'+block.id;
       var functionName = Blockly.Python.provideFunction_(
         onFinishedFunctionName,
@@ -141,9 +141,28 @@ Blockly.Python['animate'] = function(block) {
           globals,on_finished_statements,
           '\n']);
   }
-  var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+')';
+  
+  var targetArray = Blockly.Python.statementToCode(block,'TARGETS');
+  var arrayDict = "";
+  // Convert target attributes array into a python dictionary that we unpack to
+  // fill named arguments
+  if(targetArray != null && targetArray.length > 0){
+      arrayDict = ",**{"+(targetArray.replace(/\,\s*$/, '  '))+"}";
+  }
+  
+
+  var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+arrayDict+')';
   return code;
 };
+
+
+Blockly.Python['animate_position'] = function(block) {
+  var x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);
+  var code = "pos=("+x+','+y+"),";
+  return code;
+};
+
 
 Blockly.Python['screen_clear'] = function(block) {
   var code = 'screen.clear()\n';

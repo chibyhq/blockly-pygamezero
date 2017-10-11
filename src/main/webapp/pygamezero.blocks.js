@@ -14,7 +14,6 @@
       * Anchor with all supported combinations of (1,1) (0,1) (0,0) (1,0) as dropdown
    * Move actor relative
  *
- *
  */
 
 
@@ -211,10 +210,13 @@ Blockly.Blocks['actor_draw'] = {
   }
 };
 
+
+var animateBlocks = ['animate_position'];
+
 Blockly.Blocks['animate'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Animate object")
+        .appendField("Animate actor")
         .appendField(new Blockly.FieldVariable("item"), "OBJECT");
     this.appendDummyInput()
         .appendField("using tweening mode")
@@ -224,18 +226,38 @@ Blockly.Blocks['animate'] = {
     this.appendValueInput("DURATION")
         .setCheck("Number");
     this.appendDummyInput()
-        .appendField("seconds, to reach the following targets");
+        .appendField("seconds");
     this.appendStatementInput("TARGETS")
-        .setCheck(null);
+        .setCheck(animateBlocks);
     this.appendDummyInput()
         .appendField("* When finished, execute this code");
    this.appendStatementInput("ON_FINISHED")
         .setCheck(null);
-    this.setInputsInline(false);
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
     this.setTooltip('Animate the actor by updating its properties progressively');
+    this.setHelpUrl('');
+  }
+};
+    
+Blockly.Blocks['animate_position'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Position")
+        .appendField("X");
+    this.appendValueInput("X")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .appendField("Y");
+    this.appendValueInput("Y")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, animateBlocks);
+    this.setNextStatement(true, animateBlocks);
+    this.setColour(0);
+    this.setTooltip('Defines a position target for animation');
     this.setHelpUrl('');
   }
 };
@@ -393,6 +415,18 @@ Blockly.Blocks['screen_draw_rectangle'] = {
   }
 };
 
+// Global variable that lists all Text Format blocks that are allowed 
+var pgzTextFormatBlocks = ["format_font_name"
+                          ,"format_font_size"
+                          ,"format_font_color"
+                          ,"format_font_bgcolor"
+                          ,"format_text_position"
+                          ,"format_text_rotation"
+                          ,"format_text_align"
+                          ,"format_text_shadow"
+                 //         ,"__"
+                          ];
+
 Blockly.Blocks['screen_draw_text'] = {
   init: function() {
     this.appendDummyInput()
@@ -412,17 +446,6 @@ Blockly.Blocks['screen_draw_text'] = {
   }
 };
 
-// Global variable that lists all Text Format blocks that are allowed 
-var pgzTextFormatBlocks = ["format_font_name"
-                          ,"format_font_size"
-                          ,"format_font_color"
-                          ,"format_font_bgcolor"
-                          ,"format_text_position"
-                          ,"format_text_rotation"
-                          ,"format_text_align"
-                          ,"format_text_shadow"
-                 //         ,"__"
-                          ];
 
 Blockly.Blocks['format_font_name'] = {
   init: function() {
