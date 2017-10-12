@@ -195,6 +195,22 @@ Blockly.Blocks['actor_colliding'] = {
   }
 };
 
+Blockly.Blocks['actor_colliding_rect'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Actor")
+        .appendField(new Blockly.FieldVariable("item"), "ACTOR")
+        .appendField("colliding with rectangle");
+    this.appendValueInput("RECTANGLE")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setOutput(true, "Boolean");
+    this.setColour(0);
+    this.setTooltip("Returns true if the actor is colliding with the given rectangle (can be another actor)");
+    this.setHelpUrl("");
+  }
+};
+
 
 
 Blockly.Blocks['actor_draw'] = {

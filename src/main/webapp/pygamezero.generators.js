@@ -112,6 +112,13 @@ Blockly.Python['actor_colliding'] = function(block) {
   return [code, Blockly.Python.ORDER_ADDITION];
 };
 
+Blockly.Python['actor_colliding_rect'] = function(block) {
+  var actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
+  var rect = Blockly.Python.valueToCode(block,'RECTANGLE', Blockly.Python.ORDER_ATOMIC);
+  var code = actor+'.colliderect('+rect+')';
+  return [code, Blockly.Python.ORDER_ADDITION];
+};
+
 Blockly.Python['actor_position'] = function(block) {
   var variable_actor = Blockly.Python.variableDB_.getName(block.getFieldValue('ACTOR'), Blockly.Variables.NAME_TYPE);
   var value_posx = Blockly.Python.valueToCode(block, 'POSX', Blockly.Python.ORDER_ATOMIC);
