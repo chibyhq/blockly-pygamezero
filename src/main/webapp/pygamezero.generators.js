@@ -70,6 +70,12 @@ Blockly.Python['get_last_touch_position'] = function(block) {
   return [code, Blockly.Python.ORDER_ADDITION];
 };
 
+Blockly.Python['get_last_touch_position_property'] = function(block) {
+  var dropdown_property = block.getFieldValue('PROPERTY');
+  var code = 'pos['+dropdown_property+']';
+  return [code, Blockly.Python.ORDER_ADDITION];
+};
+
 Blockly.Python['get_last_drag_distance'] = function(block) {
   var code = 'rel';
   return [code, Blockly.Python.ORDER_ADDITION];
@@ -134,15 +140,15 @@ Blockly.Python['actor_position_tuple'] = function(block) {
 };
 
 Blockly.Python['animate'] = function(block) {
+  var on_finished_statements = Blockly.Python.statementToCode(block, 'ON_FINISHED');
   var variable_object = Blockly.Python.variableDB_.getName(block.getFieldValue('OBJECT'), Blockly.Variables.NAME_TYPE);
   var dropdown_tweening = block.getFieldValue('TWEENING');
-  var on_finished_statements = Blockly.Python.statementToCode(block, 'ON_FINISHED');
   var value_duration = Blockly.Python.valueToCode(block, 'DURATION', Blockly.Python.ORDER_ATOMIC);
-  var functionName = '';
+  var functionName;
   var globals = getGlobalVariablesStatement(block,false);
   if( ( on_finished_statements) && (on_finished_statements.trim() != "") ){
       var onFinishedFunctionName = 'on_finished_animation_'+block.id;
-      var functionName = Blockly.Python.provideFunction_(
+      functionName = Blockly.Python.provideFunction_(
         onFinishedFunctionName,
         [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
           globals,on_finished_statements,
@@ -156,9 +162,13 @@ Blockly.Python['animate'] = function(block) {
   if(targetArray != null && targetArray.length > 0){
       arrayDict = ",**{"+(targetArray.replace(/\,\s*$/, '  '))+"}";
   }
+  var onComplete='';
   
+  if(functionName){
+      onComplete = ',on_complete='+functionName;
+  }
 
-  var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+arrayDict+')';
+  var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+arrayDict+onComplete+')';
   return code;
 };
 
@@ -170,6 +180,11 @@ Blockly.Python['animate_position'] = function(block) {
   return code;
 };
 
+Blockly.Python['screen_size'] = function(block) {
+  var w= block.getFieldValue('W');
+  var h= block.getFieldValue('H');
+  return "WIDTH="+w+"\nHEIGHT="+h+"\n";
+};
 
 Blockly.Python['screen_clear'] = function(block) {
   var code = 'screen.clear()\n';

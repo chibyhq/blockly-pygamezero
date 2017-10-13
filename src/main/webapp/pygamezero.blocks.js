@@ -80,6 +80,21 @@ Blockly.Blocks['get_last_touch_position'] = {
   }
 };
 
+Blockly.Blocks['get_last_touch_position_property'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Get the")
+        .appendField(new Blockly.FieldDropdown([["X coordinate","0"], ["Y coordinate","1"]]), "PROPERTY")
+        .appendField("of the touch position");
+    this.setOutput(true, "Number");
+    this.setColour(120);
+    this.setTooltip('Get a coordinate property value from the last touch (inside a touchscreen event handler only !)');
+    this.setHelpUrl('');
+  }
+};
+
+
+
 Blockly.Blocks['get_last_drag_distance'] = {
   init: function() {
     this.appendDummyInput()
@@ -99,9 +114,9 @@ Blockly.Blocks['actor'] = {
         .appendField("anchored by its")
         .appendField(new Blockly.FieldDropdown([ ["top left","topleft"], ["center","center"],  ["middle top","midtop"], ["top right","topright"], ["middle left","midleft"], ["middle right","midright"], ["bottom left","bottomleft"], ["middle bottom","midbottom"], ["bottom right","bottomright"]]), "ANCHOR")
         .appendField("at position X")
-        .appendField(new Blockly.FieldNumber(0, 0), "POSX")
+        .appendField(new Blockly.FieldNumber(0), "POSX")
         .appendField("Y")
-        .appendField(new Blockly.FieldNumber(0, 0), "POSY");
+        .appendField(new Blockly.FieldNumber(0), "POSY");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
@@ -232,7 +247,7 @@ var animateBlocks = ['animate_position'];
 Blockly.Blocks['animate'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Animate actor")
+        .appendField("Animate object")
         .appendField(new Blockly.FieldVariable("item"), "OBJECT");
     this.appendDummyInput()
         .appendField("using tweening mode")
@@ -274,6 +289,21 @@ Blockly.Blocks['animate_position'] = {
     this.setNextStatement(true, animateBlocks);
     this.setColour(0);
     this.setTooltip('Defines a position target for animation');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['screen_size'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set the screen's width")
+        .appendField(new Blockly.FieldNumber(0, 0), "W")
+        .appendField("and height")
+        .appendField(new Blockly.FieldNumber(0, 0), "H");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(270);
+    this.setTooltip('Sets the screen width and height');
     this.setHelpUrl('');
   }
 };
@@ -593,7 +623,7 @@ Blockly.Blocks['clock_schedule'] = {
         .appendField("Schedule")
         .appendField(new Blockly.FieldDropdown([ ["once","schedule_unique"], ["forever","schedule"] ]), "REPEAT");
    this.appendDummyInput()
-        .appendField(" in ");
+        .appendField("in");
     this.appendValueInput("DELAY")
         .setCheck("Number");
     this.appendDummyInput()
@@ -618,7 +648,7 @@ Blockly.Blocks['clock_schedule_interval'] = {
     this.appendDummyInput()
         .appendField("Schedule")
    this.appendDummyInput()
-        .appendField(" every ");
+        .appendField("every");
     this.appendValueInput("INTERVAL")
         .setCheck("Number");
     this.appendDummyInput()
