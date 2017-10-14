@@ -270,12 +270,12 @@ Blockly.Python['format_font_size'] = function(block) {
   return code;
 };
 Blockly.Python['format_font_color'] = function(block) {
-  var value =  hexToRgb(block.getFieldValue(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));
+  var value =  hexToRgb( block.getFieldValue('VALUE'));
   var code = "'color':("+value+"),";
   return code;
 };
 Blockly.Python['format_font_bgcolor'] = function(block) {
-  var value =  hexToRgb(block.getFieldValue(block, 'VALUE', Blockly.Python.ORDER_ATOMIC));
+  var value =  hexToRgb(block.getFieldValue('VALUE'));
   var code = "'background':("+value+"),";
   return code;
 };
