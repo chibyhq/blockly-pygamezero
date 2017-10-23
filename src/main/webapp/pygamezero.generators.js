@@ -147,7 +147,7 @@ Blockly.Python['animate'] = function(block) {
   var functionName;
   var globals = getGlobalVariablesStatement(block,false);
   if( ( on_finished_statements) && (on_finished_statements.trim() != "") ){
-      var onFinishedFunctionName = 'on_finished_animation_'+block.id;
+      var onFinishedFunctionName = Blockly.Python.variableDB_.getDistinctName('on_finished_animation','PROCEDURE');
       functionName = Blockly.Python.provideFunction_(
         onFinishedFunctionName,
         [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
@@ -169,7 +169,7 @@ Blockly.Python['animate'] = function(block) {
   }
 
   var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+arrayDict+onComplete+')';
-  return code;
+  return code; 
 };
 
 
@@ -313,19 +313,20 @@ Blockly.Python['clock_schedule'] = function(block) {
   var callbackName = Blockly.Python.valueToCode(block, 'CALLBACK_NAME', Blockly.Python.ORDER_ATOMIC);
   
   if( (! callbackName) || (callbackName.trim() == "") ){
-    callbackName = 'scheduled_'+block.id;
+    callbackName = Blockly.Python.variableDB_.getDistinctName('scheduled','PROCEDURE');
   }
   
   var globals = getGlobalVariablesStatement(block,false);
   var functionName = Blockly.Python.provideFunction_(
     callbackName,
     [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
-      globals, statements,
+      globals, 
+      statements,
       '\n']);
   var delay = Blockly.Python.valueToCode(block, 'DELAY', Blockly.Python.ORDER_ATOMIC);
   
   var code = 'Clock.'+repeatMode+'('+functionName+','+delay+')';
-  return [code, Blockly.Python.ORDER_FUNCTION_CALL];  
+  return code;  
 };
 
 Blockly.Python['clock_schedule_interval'] = function(block) {
@@ -333,19 +334,20 @@ Blockly.Python['clock_schedule_interval'] = function(block) {
   var callbackName = Blockly.Python.valueToCode(block, 'CALLBACK_NAME', Blockly.Python.ORDER_ATOMIC);
   
   if( (! callbackName) || (callbackName.trim() == "") ){
-    callbackName = 'scheduled_interval_'+block.id;
+    callbackName = Blockly.Python.variableDB_.getDistinctName('scheduled','PROCEDURE');
   }
   
   var globals = getGlobalVariablesStatement(block,false);
   var functionName = Blockly.Python.provideFunction_(
     callbackName,
     [ 'def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '():',
-      globals, statements,
+      globals,
+      statements,
       '\n']);
   var interval = Blockly.Python.valueToCode(block, 'INTERVAL', Blockly.Python.ORDER_ATOMIC);
   
   var code = 'Clock.schedule_interval('+functionName+','+interval+')';
-  return [code, Blockly.Python.ORDER_FUNCTION_CALL];  
+  return code;  
 };
 
 Blockly.Python['clock_unschedule'] = function(block) {
@@ -353,6 +355,6 @@ Blockly.Python['clock_unschedule'] = function(block) {
   
   var functionName = Blockly.Python.functionNames_[callbackName];
   var code = 'Clock.unschedule('+functionName+')';
-  return [code, Blockly.Python.ORDER_FUNCTION_CALL];  
+  return code;  
 };
 
