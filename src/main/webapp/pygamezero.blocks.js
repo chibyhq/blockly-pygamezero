@@ -215,7 +215,7 @@ Blockly.Blocks['actor_colliding_rect'] = {
     this.appendDummyInput()
         .appendField("Actor")
         .appendField(new Blockly.FieldVariable("item"), "ACTOR")
-        .appendField("colliding with rectangle");
+        .appendField("colliding with rectangle or actor");
     this.appendValueInput("RECTANGLE")
         .setCheck(null);
     this.setInputsInline(true);
