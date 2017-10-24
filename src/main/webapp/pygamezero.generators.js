@@ -87,7 +87,7 @@ Blockly.Python['actor'] = function(block) {
   var dropdown_anchor = block.getFieldValue('ANCHOR');
   var number_posx = block.getFieldValue('POSX');
   var number_posy = block.getFieldValue('POSY');
-  var code = actor_var_name +' = Actor(\''+actor_var_name+'\','+dropdown_anchor+'=('+number_posx+','+number_posy+'))\n';
+  var code = actor_var_name +' = Actor(\''+actor_var_name+'\',anchor='+dropdown_anchor+',pos=('+number_posx+','+number_posy+'))\n';
   return code;
 };
 

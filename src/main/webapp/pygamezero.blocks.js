@@ -112,7 +112,7 @@ Blockly.Blocks['actor'] = {
         .appendField("Add a new game actor")
         .appendField(new Blockly.FieldVariable("item"), "NAME")
         .appendField("anchored by its")
-        .appendField(new Blockly.FieldDropdown([ ["top left","topleft"], ["center","center"],  ["middle top","midtop"], ["top right","topright"], ["middle left","midleft"], ["middle right","midright"], ["bottom left","bottomleft"], ["middle bottom","midbottom"], ["bottom right","bottomright"]]), "ANCHOR")
+        .appendField(new Blockly.FieldDropdown([ ["top left" ,"('left','top')"], ["center" ,"('center','middle')"], ["middle top" ,"('center','top')"], ["top right" ,"('right','top')"], ["middle left" ,"('left','middle')"], ["middle right" ,"('right', 'middle')"], ["bottom left" ,"('left','bottom')"], ["middle bottom","('center','bottom')"], ["bottom right" ,"('right','bottom')"]]), "ANCHOR")
         .appendField("at position X")
         .appendField(new Blockly.FieldNumber(0), "POSX")
         .appendField("Y")
