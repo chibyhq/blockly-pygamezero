@@ -325,7 +325,7 @@ Blockly.Python['clock_schedule'] = function(block) {
       '\n']);
   var delay = Blockly.Python.valueToCode(block, 'DELAY', Blockly.Python.ORDER_ATOMIC);
   
-  var code = 'Clock.'+repeatMode+'('+functionName+','+delay+')\n';
+  var code = 'clock.'+repeatMode+'('+functionName+','+delay+')\n';
   return code;  
 };
 
@@ -346,7 +346,7 @@ Blockly.Python['clock_schedule_interval'] = function(block) {
       '\n']);
   var interval = Blockly.Python.valueToCode(block, 'INTERVAL', Blockly.Python.ORDER_ATOMIC);
   
-  var code = 'Clock.schedule_interval('+functionName+','+interval+')\n';
+  var code = 'clock.schedule_interval('+functionName+','+interval+')\n';
   return code;  
 };
 
@@ -354,7 +354,7 @@ Blockly.Python['clock_unschedule'] = function(block) {
   var callbackName = Blockly.Python.valueToCode(block, 'CALLBACK_NAME', Blockly.Python.ORDER_ATOMIC);
   
   var functionName = Blockly.Python.functionNames_[callbackName];
-  var code = 'Clock.unschedule('+functionName+')\n';
+  var code = 'clock.unschedule('+functionName+')\n';
   return code;  
 };
 
