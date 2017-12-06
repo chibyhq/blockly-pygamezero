@@ -160,12 +160,12 @@ Blockly.Python['animate'] = function(block) {
   // Convert target attributes array into a python dictionary that we unpack to
   // fill named arguments
   if(targetArray != null && targetArray.length > 0){
-      arrayDict = ",**{"+(targetArray.replace(/\,\s*$/, '  '))+"}";
+      arrayDict = ","+(targetArray.replace(/\,\s*$/, ' '))+"";
   }
   var onComplete='';
   
   if(functionName){
-      onComplete = ',on_complete='+functionName;
+      onComplete = ',on_finished='+functionName;
   }
 
   var code = 'animate('+variable_object+',tween=\''+dropdown_tweening+'\',duration='+value_duration+arrayDict+onComplete+')';
