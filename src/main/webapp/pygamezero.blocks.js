@@ -48,7 +48,7 @@ Blockly.Blocks['on_touch_event'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_WHEN THE TOUCH SCREEN IS "])
-        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_PRESSED"],"ON_MOUSE_DOWN"], [Blockly.Msg["PGZ_RELEASED"],"ON_MOUSE_UP"] ]), "EVENT");
+        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_PRESSED"],"on_mouse_down"], [Blockly.Msg["PGZ_RELEASED"],"on_mouse_up"] ]), "EVENT");
     this.appendStatementInput("STATEMENTS")
         .setCheck(null);
     this.setColour(120);
@@ -112,7 +112,7 @@ Blockly.Blocks['actor'] = {
         .appendField(Blockly.Msg["PGZ_ADD A NEW GAME ACTOR"])
         .appendField(new Blockly.FieldVariable("item"), "NAME")
         .appendField(Blockly.Msg["PGZ_ANCHORED BY ITS"])
-        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_TOP LEFT"] ,"('LEFT','TOP')"], [Blockly.Msg["PGZ_CENTER"],"('CENTER','MIDDLE')"], [Blockly.Msg["PGZ_MIDDLE TOP"] ,"('CENTER','TOP')"], [Blockly.Msg["PGZ_TOP RIGHT"] ,"('RIGHT','TOP')"], [Blockly.Msg["PGZ_MIDDLE LEFT"] ,"('LEFT','MIDDLE')"], [Blockly.Msg["PGZ_MIDDLE RIGHT"] ,"('RIGHT', 'MIDDLE')"], [Blockly.Msg["PGZ_BOTTOM LEFT"] ,"('LEFT','BOTTOM')"], [Blockly.Msg["PGZ_MIDDLE BOTTOM"],"('CENTER','BOTTOM')"], [Blockly.Msg["PGZ_BOTTOM RIGHT"] ,"('RIGHT','BOTTOM')"]]), "ANCHOR")
+        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_TOP LEFT"] ,"('left','top')"], [Blockly.Msg["PGZ_CENTER"],"('center','middle')"], [Blockly.Msg["PGZ_MIDDLE TOP"] ,"('center','top')"], [Blockly.Msg["PGZ_TOP RIGHT"] ,"('right','top')"], [Blockly.Msg["PGZ_MIDDLE LEFT"] ,"('left','middle')"], [Blockly.Msg["PGZ_MIDDLE RIGHT"] ,"('right', 'middle')"], [Blockly.Msg["PGZ_BOTTOM LEFT"] ,"('left','bottom')"], [Blockly.Msg["PGZ_MIDDLE BOTTOM"],"('center','bottom')"], [Blockly.Msg["PGZ_BOTTOM RIGHT"] ,"('right','bottom')"]]), "ANCHOR")
         .appendField(Blockly.Msg["PGZ_AT POSITION X"])
         .appendField(new Blockly.FieldNumber(0), "POSX")
         .appendField(Blockly.Msg["PGZ_Y"])
@@ -147,7 +147,7 @@ Blockly.Blocks['get_actor_property'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_GET THE"])
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg["PGZ_X COORDINATE"],"X"], [Blockly.Msg["PGZ_Y COORDINATE"],"Y"]]), "PROPERTY")
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg["PGZ_X COORDINATE"],"x"], [Blockly.Msg["PGZ_Y COORDINATE"],"y"]]), "PROPERTY")
         .appendField(Blockly.Msg["PGZ_POSITION OF ACTOR"])
         .appendField(new Blockly.FieldVariable("item"), "ACTOR");
     this.setOutput(true, "Number");
@@ -251,7 +251,7 @@ Blockly.Blocks['animate'] = {
         .appendField(new Blockly.FieldVariable("item"), "OBJECT");
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_USING TWEENING MODE"])
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg["PGZ_LINEAR"],"LINEAR"], [Blockly.Msg["PGZ_ACCELERATE"],'ACCELERATE'], [Blockly.Msg["PGZ_DECELERATE"],'DECELERATE'], [Blockly.Msg["PGZ_ACCELERATE THEN DECELERATE"],'ACCEL_DECEL'], [Blockly.Msg["PGZ_ELASTIC AT THE END"],'END_ELASTIC'], [Blockly.Msg["PGZ_ELASTIC AT THE START"],'START_ELASTIC'], [Blockly.Msg["PGZ_ELASTIC AT START AND END"],'BOTH_ELASTIC'], [Blockly.Msg["PGZ_BOUNCE AT THE END"],'BOUNCE_END'], [Blockly.Msg["PGZ_BOUNCE AT THE START"],'BOUNCE_START'], [Blockly.Msg["PGZ_BOUNCE AT THE START AND END"],'BOUNCE_START_END']]), "TWEENING");
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg["PGZ_LINEAR"],"linear"], [Blockly.Msg["PGZ_ACCELERATE"],'accelerate'], [Blockly.Msg["PGZ_DECELERATE"],'decelerate'], [Blockly.Msg["PGZ_ACCELERATE THEN DECELERATE"],'accel_decel'], [Blockly.Msg["PGZ_ELASTIC AT THE END"],'end_elastic'], [Blockly.Msg["PGZ_ELASTIC AT THE START"],'start_elastic'], [Blockly.Msg["PGZ_ELASTIC AT START AND END"],'both_elastic'], [Blockly.Msg["PGZ_BOUNCE AT THE END"],'bounce_end'], [Blockly.Msg["PGZ_BOUNCE AT THE START"],'bounce_start'], [Blockly.Msg["PGZ_BOUNCE AT THE START AND END"],'bounce_start_end']]), "TWEENING");
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_DURING"]);
     this.appendValueInput("DURATION")
@@ -415,7 +415,7 @@ Blockly.Blocks['screen_draw_circle'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_DRAW A(N)"])
-        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_EMPTY"],"CIRCLE"], [Blockly.Msg["PGZ_FILLED"],"FILLED_CIRCLE"]]), "EMPTYFILLED")
+        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_EMPTY"],"circle"], [Blockly.Msg["PGZ_FILLED"],"filled_circle"]]), "EMPTYFILLED")
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_CIRCLE AT"]);
     this.appendValueInput("CENTERX")
@@ -444,7 +444,7 @@ Blockly.Blocks['screen_draw_rectangle'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_DRAW A(N)"])
-        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_EMPTY"],"RECT"], [Blockly.Msg["PGZ_FILLED"],"FILLED_RECT"]]), "EMPTYFILLED")
+        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_EMPTY"],"rect"], [Blockly.Msg["PGZ_FILLED"],"filled_rect"]]), "EMPTYFILLED")
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_RECTANGLE "]);
     this.appendValueInput("RECT")
@@ -552,7 +552,7 @@ Blockly.Blocks['format_text_position'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_TEXT POSITION ANCHORED BY ITS"])
-        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_TOP LEFT"],"TOPLEFT"], [Blockly.Msg["PGZ_CENTER"],"CENTER"],  [Blockly.Msg["PGZ_MIDDLE TOP"],"MIDTOP"], [Blockly.Msg["PGZ_TOP RIGHT"],"TOPRIGHT"], [Blockly.Msg["PGZ_MIDDLE LEFT"],"MIDLEFT"], [Blockly.Msg["PGZ_MIDDLE RIGHT"],"MIDRIGHT"], [Blockly.Msg["PGZ_BOTTOM LEFT"],"BOTTOMLEFT"], [Blockly.Msg["PGZ_MIDDLE BOTTOM"],"MIDBOTTOM"], [Blockly.Msg["PGZ_BOTTOM RIGHT"],"BOTTOMRIGHT"]]), "ANCHOR")
+        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_TOP LEFT"],"topleft"], [Blockly.Msg["PGZ_CENTER"],"center"],  [Blockly.Msg["PGZ_MIDDLE TOP"],"midtop"], [Blockly.Msg["PGZ_TOP RIGHT"],"topright"], [Blockly.Msg["PGZ_MIDDLE LEFT"],"midleft"], [Blockly.Msg["PGZ_MIDDLE RIGHT"],"midright"], [Blockly.Msg["PGZ_MIDDLE BOTTOM"],"midbottom"], [Blockly.Msg["PGZ_BOTTOM RIGHT"],"bottomright"], [Blockly.Msg["PGZ_BOTTOM LEFT"],"bottomleft"]]), "ANCHOR")
         .appendField(Blockly.Msg["PGZ_AT X"]);
     this.appendValueInput("X")
         .setCheck("Number");
@@ -564,7 +564,7 @@ Blockly.Blocks['format_text_position'] = {
     this.setPreviousStatement(true, pgzTextFormatBlocks);
     this.setNextStatement(true, pgzTextFormatBlocks);
     this.setColour(250);
-    this.setTooltip(Blockly.Msg["PGZ_SETS THE FONT COLOR OF THE TEXT"]);
+    this.setTooltip(Blockly.Msg["PGZ_SETS THE POSITION ANCHOR OF THE TEXT"]);
 
   }
 };
@@ -587,7 +587,7 @@ Blockly.Blocks['format_text_align'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_TEXT ALIGNED TO THE "])
-        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_LEFT"],"LEFT"], [Blockly.Msg["PGZ_CENTER"],"CENTER"], [Blockly.Msg["PGZ_RIGHT"],"RIGHT"]]), "VALUE")
+        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_LEFT"],"left"], [Blockly.Msg["PGZ_CENTER"],"center"], [Blockly.Msg["PGZ_RIGHT"],"right"]]), "VALUE")
     this.setInputsInline(true);
     this.setPreviousStatement(true, pgzTextFormatBlocks);
     this.setNextStatement(true, pgzTextFormatBlocks);
@@ -621,7 +621,7 @@ Blockly.Blocks['clock_schedule'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_SCHEDULE"])
-        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_ONCE"],"SCHEDULE_UNIQUE"], [Blockly.Msg["PGZ_FOREVER"],"SCHEDULE"] ]), "REPEAT");
+        .appendField(new Blockly.FieldDropdown([ [Blockly.Msg["PGZ_ONCE"],"schedule_unique"], [Blockly.Msg["PGZ_FOREVER"],"schedule"] ]), "REPEAT");
    this.appendDummyInput()
         .appendField(Blockly.Msg["PGZ_IN"]);
     this.appendValueInput("DELAY")
