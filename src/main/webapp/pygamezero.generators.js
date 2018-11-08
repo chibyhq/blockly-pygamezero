@@ -296,7 +296,7 @@ Blockly.Python['format_text_rotation'] = function(block) {
 
 Blockly.Python['format_text_align'] = function(block) {
   var value =  block.getFieldValue('VALUE');
-  var code = "'align':"+value+",";
+  var code = "'align':'"+value+"',";
   return code;
 };
 
