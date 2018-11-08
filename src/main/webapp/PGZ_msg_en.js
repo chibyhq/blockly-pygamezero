@@ -60,6 +60,7 @@ Blockly.Msg["PGZ_SETS THE FONT COLOR OF THE TEXT"] = "Sets the Font Color of the
 Blockly.Msg["PGZ_SETS THE FONT NAME OF THE TEXT"] = "Sets the Font Name of the text";
 Blockly.Msg["PGZ_SETS THE FONT SIZE OF THE TEXT"] = "Sets the Font Size of the text";
 Blockly.Msg["PGZ_SETS THE ROTATION ANGLE OF THE TEXT"] = "Sets the Rotation Angle of the text";
+Blockly.Msg["PGZ_SETS THE POSITION ANCHOR OF THE TEXT"] = "Sets the Position anchor of the text";
 Blockly.Msg["PGZ_SETS THE SCREEN WIDTH AND HEIGHT"] = "Sets the screen width and height";
 Blockly.Msg["PGZ_TEXT ROTATION ANGLE"] = "Text Rotation Angle";
 Blockly.Msg["PGZ_TEXT ALIGNED TO THE "] = "Text aligned to the ";
