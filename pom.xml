@@ -27,7 +27,14 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
+    
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    
     <scm>
         <url>http://github.com/chiby-hq/blockly-pygamezero</url>
         <connection>scm:git:https://github.com/chiby-hq/blockly-pygamezero.git</connection>
@@ -39,7 +46,7 @@
         <developer>
             <id>bcopy</id>
             <name>Brice Copy</name>
-            <email>brice.copy@gmail.com</email>
+            <email>cmc.robotics@cern.ch</email>
         </developer>
     </developers>
 
