@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <packaging>jar</packaging>
-    <groupId>com.github.chiby.blockly</groupId>
+    <groupId>com.github.chibyhq</groupId>
     <artifactId>blockly-pygamezero</artifactId>
     <version>0.3-SNAPSHOT</version>
     <name>Blockly Pygame Zero block library</name>
     <description>WebJar for a Blockly Pygamezero block library</description>
-    <url>http://github.com/chiby-hq/blockly-pygamezero</url>
+    <url>http://github.com/chibyhq/blockly-pygamezero</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,9 +36,9 @@
     </repositories>
     
     <scm>
-        <url>http://github.com/chiby-hq/blockly-pygamezero</url>
-        <connection>scm:git:https://github.com/chiby-hq/blockly-pygamezero.git</connection>
-        <developerConnection>scm:git:ssh://github.com/chiby-hq/blockly-pygamezero.git</developerConnection>
+        <url>https://github.com/chibyhq/blockly-pygamezero</url>
+        <connection>scm:git:https://github.com/chibyhq/blockly-pygamezero.git</connection>
+        <developerConnection>scm:git:ssh://github.com/chibyhq/blockly-pygamezero.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
