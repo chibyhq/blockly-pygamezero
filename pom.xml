@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
     <groupId>com.github.chibyhq</groupId>
     <artifactId>blockly-pygamezero</artifactId>
-    <version>0.3</version>
+    <version>0.4-SNAPSHOT</version>
     <name>Blockly Pygame Zero block library</name>
     <description>WebJar for a Blockly Pygamezero block library</description>
     <url>http://github.com/chibyhq/blockly-pygamezero</url>
